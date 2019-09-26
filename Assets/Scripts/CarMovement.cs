@@ -5,7 +5,8 @@ using UnityEngine;
 public class CarMovement : MonoBehaviour {
     private Vector2 movement;
     private float movementSqrMagnitude;
-    public float carSpeed = 0.80f;
+    public float carSpeed = 0.8f;
+    public float rotationSpeed = 200.0f;
 
     // Start is called before the first frame update
     void Start () {
@@ -14,26 +15,30 @@ public class CarMovement : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        GetMovementInput ();
-        CarPosition ();
-        CarRotation ();
-        EngineAnimation ();
-        EngineAudio ();
-    }
-
-    void GetMovementInput () {
-        movement = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
-
-        Vector2.ClampMagnitude (movement, 1.0f);
-        movementSqrMagnitude = movement.sqrMagnitude;
+        CarPosition();
+        CarRotation();
     }
 
     void CarPosition () {
-        transform.Translate (movement * carSpeed * Time.deltaTime, Space.World);
+        // Get the vertical axis.
+        // The value is in the range -1 to 1
+        float translationVert = Input.GetAxis ("Vertical") * carSpeed;
+        // Make it move 10 meters per second instead of 10 meters per frame
+        translationVert *= Time.deltaTime;
+        // Move translation along the object's y-axis
+        transform.Translate (0, translationVert, 0);
     }
 
     void CarRotation () {
-        // transform.Rotate (0, 0, Input.GetAxis ("Horizontal"), Space.World);
+        // Get the horizontal axis.
+        // The value is in the range -1 to 1
+        float rotation = Input.GetAxis ("Horizontal") * rotationSpeed;
+
+        // Make it rotate 10 meters per second instead of 10 meters per frame
+        rotation *= Time.deltaTime;
+
+        // Rotate around our z-axis
+        transform.Rotate (0, 0, rotation);
     }
 
     void EngineAnimation () {
