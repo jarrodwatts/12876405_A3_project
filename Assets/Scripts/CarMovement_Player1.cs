@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarMovement_Player1 : MonoBehaviour {
     private Vector2 movement;
@@ -8,15 +9,26 @@ public class CarMovement_Player1 : MonoBehaviour {
     public float carSpeed = 0.8f;
     public float rotationSpeed = 200.0f;
 
+    public Text player1LapsText;
+    private int player1Laps;
     // Start is called before the first frame update
     void Start () {
-
+        player1Laps = 0;
+        SetLapsText ();
     }
 
     // Update is called once per frame
     void Update () {
-        CarPosition();
-        CarRotation();
+        CarPosition ();
+        CarRotation ();
+    }
+
+    void OnTriggerEnter2D (Collider2D other) {
+
+        if (other.gameObject.CompareTag ("LapLine")) {
+            player1Laps = player1Laps + 1;
+            SetLapsText ();
+        }
     }
 
     void CarPosition () {
@@ -39,5 +51,9 @@ public class CarMovement_Player1 : MonoBehaviour {
 
         // Rotate around our z-axis
         transform.Rotate (0, 0, rotation);
+    }
+
+    void SetLapsText () {
+        player1LapsText.text = "Player 1: " + player1Laps.ToString ();
     }
 }
