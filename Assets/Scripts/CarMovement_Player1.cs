@@ -6,21 +6,33 @@ using UnityEngine.UI;
 public class CarMovement_Player1 : MonoBehaviour {
     private Vector2 movement;
     private float movementSqrMagnitude;
-    public float carSpeed = 0.8f;
+    public float carSpeed;
     public float rotationSpeed = 200.0f;
-
+    
     public Text player1LapsText;
     private int player1Laps;
+
+    //get microphone input from other class
+    public MicrophoneTransform microphoneTransformer;
+
+    public float bonusSpeed;
+
     // Start is called before the first frame update
     void Start () {
         player1Laps = 0;
         SetLapsText ();
+
+        //make the link from microphonetransform to this script
+        //as they are both attached in theory we can use GetComponent
+        microphoneTransformer = gameObject.GetComponent<MicrophoneTransform> ();
+
     }
 
     // Update is called once per frame
     void Update () {
         CarPosition ();
         CarRotation ();
+        GetBonusSpeed ();
     }
 
     void OnTriggerEnter2D (Collider2D other) {
@@ -55,5 +67,16 @@ public class CarMovement_Player1 : MonoBehaviour {
 
     void SetLapsText () {
         player1LapsText.text = "Player 1: " + player1Laps.ToString ();
+    }
+
+    void GetBonusSpeed () {
+        //get the sound level from the other class 
+        bonusSpeed = microphoneTransformer.testSound;
+
+        addBonusSpeed ();
+    }
+
+    void addBonusSpeed () {
+        carSpeed = 0.6f + bonusSpeed / 2; //this is just a algorith for speed that feels controllable
     }
 }

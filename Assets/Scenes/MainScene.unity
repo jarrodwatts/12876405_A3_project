@@ -770,7 +770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -40}
+  m_AnchoredPosition: {x: 189, y: -40}
   m_SizeDelta: {x: 120, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1059340795
@@ -914,7 +914,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437722075}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ec3beb918da38024386bf543ae09fb39, type: 3}
@@ -1151,7 +1151,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 385, y: -40}
+  m_AnchoredPosition: {x: 454, y: -40}
   m_SizeDelta: {x: 120, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1623939416
@@ -1212,7 +1212,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b9ee86e68b49e814da30eb258e84917a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
@@ -1360,6 +1360,31 @@ MonoBehaviour:
   carSpeed: 0.8
   rotationSpeed: 200
   player2LapsText: {fileID: 1623939416}
+--- !u!114 &1952962072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952962065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6b5e2cc2905bf4b9e58e1e69bffdba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testSound: 0
+  _device: 
+  _clipRecord: {fileID: 0}
+  _sampleWindow: 128
+  _isInitialized: 0
 --- !u!1 &2146731530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,6 +1615,8 @@ MonoBehaviour:
   carSpeed: 0.8
   rotationSpeed: 200
   player1LapsText: {fileID: 1059340795}
+  microphoneTransformer: {fileID: 0}
+  bonusSpeed: 0
 --- !u!82 &4285476610459953890
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1597,10 +1624,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4285476610459953887}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b9ee86e68b49e814da30eb258e84917a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
@@ -1733,6 +1760,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24216539, y: 0.32337505}
   m_EdgeRadius: 0
+--- !u!114 &4285476610459953895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285476610459953887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8105069e5b8c8cd4da76867827dfebb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testSound: 0
 --- !u!1 &5449039172452017105 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5449039172452017105, guid: 2f3e38fce8dbdc04aa27dd0bc70ecdb1,

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CarMovement_Player2 : MonoBehaviour {
     private Vector2 movement;
     private float movementSqrMagnitude;
-    public float carSpeed = 0.8f;
+    public float carSpeed;
     public float rotationSpeed = 200.0f;
 
     public Text player2LapsText;
@@ -16,6 +16,7 @@ public class CarMovement_Player2 : MonoBehaviour {
     void Start () {
         player2Laps = 0;
         SetLapsText ();
+
     }
 
     // Update is called once per frame
@@ -57,4 +58,5 @@ public class CarMovement_Player2 : MonoBehaviour {
     void SetLapsText () {
         player2LapsText.text = "Player 2: " + player2Laps.ToString ();
     }
+
 }
