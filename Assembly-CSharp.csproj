@@ -53,10 +53,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\AudioTransform.cs" />
      <Compile Include="Assets\Scripts\CarMovement_Player1.cs" />
      <Compile Include="Assets\Scripts\CarMovement_Player2.cs" />
      <Compile Include="Assets\Scripts\MicrophoneTransform.cs" />
+     <Compile Include="Assets\Scripts\MicrophoneTransform_Player2.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/New/Documents/GitHub/12876405_A3_project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

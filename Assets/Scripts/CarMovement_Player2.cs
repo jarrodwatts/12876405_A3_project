@@ -12,10 +12,17 @@ public class CarMovement_Player2 : MonoBehaviour {
     public Text player2LapsText;
     private int player2Laps;
 
+    //get microphone input from other class
+    public MicrophoneTransform_Player2 microphoneTransformerPlayerTwo;
+
+    public float bonusSpeed;
+
     // Start is called before the first frame update
     void Start () {
         player2Laps = 0;
         SetLapsText ();
+
+        microphoneTransformerPlayerTwo = gameObject.GetComponent<MicrophoneTransform_Player2> ();
 
     }
 
@@ -23,6 +30,7 @@ public class CarMovement_Player2 : MonoBehaviour {
     void Update () {
         CarPosition ();
         CarRotation ();
+        GetBonusSpeed ();
     }
 
     void OnTriggerEnter2D (Collider2D other) {
@@ -59,4 +67,14 @@ public class CarMovement_Player2 : MonoBehaviour {
         player2LapsText.text = "Player 2: " + player2Laps.ToString ();
     }
 
+    void GetBonusSpeed () {
+        //get the sound level from the other class 
+        bonusSpeed = microphoneTransformerPlayerTwo.testSound;
+
+        addBonusSpeed ();
+    }
+
+    void addBonusSpeed () {
+        carSpeed = 0.6f + bonusSpeed / 2; //this is just a algorith for speed that feels controllable
+    }
 }

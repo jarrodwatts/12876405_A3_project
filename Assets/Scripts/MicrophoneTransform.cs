@@ -12,14 +12,12 @@ public class MicrophoneTransform : MonoBehaviour {
 
     void InitMic () {
         if (_device == null) {
-            _device = Microphone.devices[0];
-            _clipRecord = Microphone.Start (_device, true, 999, 44100);
-            Debug.Log (_clipRecord);
+            if (Microphone.devices.Length != 0) {
+                _device = Microphone.devices[0];
+                Debug.Log ("Player 1 Input Device is: " + Microphone.devices[0]);
+                _clipRecord = Microphone.Start (_device, true, 999, 44100);
+            }
         }
-    }
-
-    void StopMicrophone () {
-        Microphone.End (_device);
     }
 
     float LevelMax () {
@@ -47,29 +45,6 @@ public class MicrophoneTransform : MonoBehaviour {
 
     void OnEnable () {
         InitMic ();
-        _isInitialized = true;
-    }
-
-    void OnDisable () {
-        StopMicrophone ();
-    }
-
-    void OnDestory () {
-        StopMicrophone ();
-    }
-
-    void OnApplicationFocus (bool focus) {
-        if (focus) {
-            if (!_isInitialized) {
-                InitMic ();
-                _isInitialized = true;
-            }
-        }
-
-        if (!focus) {
-            StopMicrophone ();
-            _isInitialized = false;
-        }
     }
 
 }
