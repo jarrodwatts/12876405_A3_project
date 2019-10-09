@@ -8,7 +8,7 @@ public class CarMovement_Player1 : MonoBehaviour {
     private float movementSqrMagnitude;
     public float carSpeed;
     public float rotationSpeed = 200.0f;
-    
+
     public Text player1LapsText;
     private int player1Laps;
 
@@ -16,6 +16,12 @@ public class CarMovement_Player1 : MonoBehaviour {
     public MicrophoneTransform microphoneTransformer;
 
     public float bonusSpeed;
+
+    private GameObject trackGameObject;
+
+    public AudioSource source;
+    public AudioClip vroomAudioClip;
+    public AudioClip oofAudioClip;
 
     // Start is called before the first frame update
     void Start () {
@@ -25,6 +31,12 @@ public class CarMovement_Player1 : MonoBehaviour {
         //make the link from microphonetransform to this script
         //as they are both attached in theory we can use GetComponent
         microphoneTransformer = gameObject.GetComponent<MicrophoneTransform> ();
+
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        source = audioSources[0];
+        vroomAudioClip = audioSources[1].clip;
+
+        oofAudioClip = audioSources[0].clip;
 
     }
 
@@ -40,6 +52,12 @@ public class CarMovement_Player1 : MonoBehaviour {
         if (other.gameObject.CompareTag ("LapLine")) {
             player1Laps = player1Laps + 1;
             SetLapsText ();
+        }
+    }
+
+    void OnCollisionEnter2D (Collision2D other) {
+        if (other.gameObject.CompareTag ("Track")) {
+            source.PlayOneShot(oofAudioClip);
         }
     }
 
@@ -67,6 +85,9 @@ public class CarMovement_Player1 : MonoBehaviour {
 
     void SetLapsText () {
         player1LapsText.text = "Player 1: " + player1Laps.ToString ();
+        if (player1Laps == 10) {
+            Debug.Log("Game Over - Red (Player 1) Wins!");
+        }
     }
 
     void GetBonusSpeed () {

@@ -17,12 +17,20 @@ public class CarMovement_Player2 : MonoBehaviour {
 
     public float bonusSpeed;
 
+    public AudioSource source;
+    public AudioClip oofAudioClip;
+
     // Start is called before the first frame update
     void Start () {
         player2Laps = 0;
         SetLapsText ();
 
         microphoneTransformerPlayerTwo = gameObject.GetComponent<MicrophoneTransform_Player2> ();
+
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        source = audioSources[0];
+
+        oofAudioClip = audioSources[0].clip;
 
     }
 
@@ -38,6 +46,12 @@ public class CarMovement_Player2 : MonoBehaviour {
         if (other.gameObject.CompareTag ("LapLine")) {
             player2Laps = player2Laps + 1;
             SetLapsText ();
+        }
+    }
+
+    void OnCollisionEnter2D (Collision2D other) {
+        if (other.gameObject.CompareTag ("Track")) {
+            source.PlayOneShot (oofAudioClip);
         }
     }
 
@@ -65,6 +79,9 @@ public class CarMovement_Player2 : MonoBehaviour {
 
     void SetLapsText () {
         player2LapsText.text = "Player 2: " + player2Laps.ToString ();
+        if (player2Laps == 10) {
+            Debug.Log("Game Over - Blue (Player 2) Wins!");
+        }
     }
 
     void GetBonusSpeed () {
