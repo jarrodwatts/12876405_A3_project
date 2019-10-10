@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /**
     This class is for Player 1 (The Red Car) - contains all the controls and interactions of the Red Car
@@ -99,6 +100,7 @@ public class CarMovement_Player1 : MonoBehaviour {
         player1LapsText.text = "Player 1: " + player1Laps.ToString ();
         if (player1Laps == 10) {
             Debug.Log("Game Over - Red (Player 1) Wins!");
+            SceneManager.LoadScene("EndGameScene", LoadSceneMode.Single); //end the game by swapping to the endgamescene at 10 laps 
         }
     }
 
