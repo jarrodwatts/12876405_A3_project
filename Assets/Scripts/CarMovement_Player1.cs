@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+    This class is for Player 1 (The Red Car) - contains all the controls and interactions of the Red Car
+    Including the speed manipulation through microphone input,
+    Playing sounds via trigger and collision events,
+    and Updating the laps through trigger events.
+ */
 public class CarMovement_Player1 : MonoBehaviour {
     private Vector2 movement;
     private float movementSqrMagnitude;
@@ -12,13 +18,14 @@ public class CarMovement_Player1 : MonoBehaviour {
     public Text player1LapsText;
     private int player1Laps;
 
-    //get microphone input from other class
+    //Get microphone input from other class
     public MicrophoneTransform microphoneTransformer;
 
     public float bonusSpeed;
 
     private GameObject trackGameObject;
 
+    //Set out audio layout so that oof sound can play onCollision
     public AudioSource source;
     public AudioClip vroomAudioClip;
     public AudioClip oofAudioClip;
@@ -32,6 +39,7 @@ public class CarMovement_Player1 : MonoBehaviour {
         //as they are both attached in theory we can use GetComponent
         microphoneTransformer = gameObject.GetComponent<MicrophoneTransform> ();
 
+        //Create an array of AudioSources since if we're using GetComponents then we can grab multiple of the same type
         AudioSource[] audioSources = GetComponents<AudioSource>();
         source = audioSources[0];
         vroomAudioClip = audioSources[1].clip;
@@ -42,11 +50,13 @@ public class CarMovement_Player1 : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        //Call each method we would like to have happen once per frame
         CarPosition ();
         CarRotation ();
         GetBonusSpeed ();
     }
 
+    //Triggered when the Lap Line Collider is passed through by a car
     void OnTriggerEnter2D (Collider2D other) {
 
         if (other.gameObject.CompareTag ("LapLine")) {
@@ -55,6 +65,7 @@ public class CarMovement_Player1 : MonoBehaviour {
         }
     }
 
+    //Triggered when the Car hits an area of the track - play oof sound effect
     void OnCollisionEnter2D (Collision2D other) {
         if (other.gameObject.CompareTag ("Track")) {
             source.PlayOneShot(oofAudioClip);
@@ -83,6 +94,7 @@ public class CarMovement_Player1 : MonoBehaviour {
         transform.Rotate (0, 0, rotation);
     }
 
+    //Change the Laps above the track to increment by 1 for player 1 - this method is called when the lap line is scrossed in onTriggerEnter2D.
     void SetLapsText () {
         player1LapsText.text = "Player 1: " + player1Laps.ToString ();
         if (player1Laps == 10) {
@@ -90,6 +102,7 @@ public class CarMovement_Player1 : MonoBehaviour {
         }
     }
 
+    //Use the microphoneTransformer script's shared variable to gather how loud player 1's input device is, add that to speed.
     void GetBonusSpeed () {
         //get the sound level from the other class 
         bonusSpeed = microphoneTransformer.testSound;
@@ -97,6 +110,7 @@ public class CarMovement_Player1 : MonoBehaviour {
         addBonusSpeed ();
     }
 
+    //Add the microphone input level to speed variable
     void addBonusSpeed () {
         carSpeed = 0.6f + bonusSpeed / 2; //this is just a algorith for speed that feels controllable
     }
